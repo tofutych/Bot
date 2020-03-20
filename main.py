@@ -139,14 +139,17 @@ def callback_inline(call):
     if call.data == "main_menu":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text=f"Выбирай, {call.message.chat.first_name}", reply_markup=start_keyboard())
+
     if call.data == "back0":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text="На какой день по числителю?",
                               reply_markup=days_keyboard_0())
+
     if call.data == "back1":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text="На какой день по знаменателю?",
                               reply_markup=days_keyboard_1())
+
     if call.data == "numerator":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text="На какой день по числителю?",
@@ -155,6 +158,7 @@ def callback_inline(call):
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text=activity_numerator.get(call.data),
                               reply_markup=result_keyboard_0())
+                              
     if call.data == "denominator":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text="На какой день по знаменателю?",
@@ -163,6 +167,7 @@ def callback_inline(call):
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text=activity_denominator.get(call.data),
                               reply_markup=result_keyboard_1())
+
     if call.data == "today":
         if datetime.datetime.today().weekday() == 6:
             bot.answer_callback_query(call.id, "Долбаеб, сегодня воскресенье")
@@ -177,6 +182,7 @@ def callback_inline(call):
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                       text=activity_denominator.get(denominator_key),
                                       reply_markup=today_tomorrow_keyboard())
+
     if call.data == "tomorrow":
         if datetime.datetime.today().weekday() + 1 == 6:
             bot.answer_callback_query(call.id, "Долбаеб, завтра воскресенье")
@@ -192,11 +198,14 @@ def callback_inline(call):
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                       text=activity_denominator.get(denominator_key),
                                       reply_markup=today_tomorrow_keyboard())
+
     if call.data == "fio":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text=gang, reply_markup=fio_keyboard())
+
     if call.data == "question":
         bot.answer_callback_query(call.id, choice(yes_no))
+
     if call.data == "num_denom":
         if datetime.datetime.now().isocalendar()[1] % 2 == 0:
             bot.answer_callback_query(call.id, days.get((datetime.datetime.today().weekday())) + ", числитель.")
